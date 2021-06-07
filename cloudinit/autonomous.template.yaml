@@ -1,0 +1,14 @@
+#cloud-config
+timezone: ${timezone}
+
+write_files:
+  # setup script
+  - path: "/root/bastion/notification.sh"
+    permissions: "0700"
+    encoding: "gzip+base64"
+    content: |
+      ${notification_sh_content}
+runcmd:
+  - echo "Configuring running notification script..."
+  - bash /root/bastion/notification.sh
+  - touch /home/opc/bastion.finish
