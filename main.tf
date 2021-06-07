@@ -55,7 +55,7 @@ resource "oci_core_subnet" "bastion" {
 
   ipv6cidr_block             = var.ipv6_cidr_block
   cidr_block                 = var.cidr_block
-  dns_label                  = module.this.name
+  dns_label                  = module.this.name== "" ? "bastion": module.this.name
   prohibit_public_ip_on_vnic = false
   route_table_id             = var.ig_route_id
   security_list_ids          = [oci_core_security_list.bastion[0].id]
